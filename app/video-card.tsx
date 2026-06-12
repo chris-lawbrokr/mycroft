@@ -57,17 +57,19 @@ export default function VideoCard({
         The People's
         <br className="min-[1080px]:hidden" /> Attorney
       </span>
-      {/* Supporting copy is desktop-only; the mobile card stays uncluttered. */}
-      <div className="absolute bottom-8 left-8 hidden max-w-[55%] text-left text-white min-[1080px]:block">
-        <p className="mb-4 text-sm font-normal">
-          <b>Top-Reviewed Lawyers Serving Oklahoma City</b>
-        </p>
-        <p className="mt-2 max-w-[400px] text-sm font-normal leading-tight">
-          We’re different from other law firms in OKC. Younger, more innovative,
-          and with the dynamic energy that your complex legal matter needs.
-          We’re tough on the opposition and fiercely dedicated to your rights.
-        </p>
-      </div>
+      {/* Desktop-only customer testimonial pinned bottom-left, glass styled. */}
+      <figure className="absolute bottom-8 left-8 hidden h-24 max-w-[440px] items-center gap-4 rounded-3xl border border-white/30 bg-white/10 px-6 text-left text-white shadow-lg shadow-black/10 backdrop-blur-md min-[1080px]:flex">
+        <img
+          src="/images/testimonial-icon.png"
+          alt=""
+          aria-hidden
+          className="size-12 shrink-0 rounded-xl"
+        />
+        <blockquote className="max-w-[200px] text-sm font-normal">
+          Mycroft&apos;s 5-in-1 platform seamlessly consolidated our entire
+          security stack
+        </blockquote>
+      </figure>
       <CardActions />
     </div>
   );
