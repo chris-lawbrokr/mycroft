@@ -39,7 +39,7 @@ export default function VideoCard({
           type="button"
           className="flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-base font-normal text-white shadow-lg shadow-black/10 backdrop-blur-md transition-colors hover:bg-white/20"
         >
-          Book a demo
+          Book a Demo
         </button>
         <button
           type="button"
