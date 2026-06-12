@@ -161,7 +161,7 @@ export default function Overlay() {
             <div className="flex h-full w-full max-w-[min(100%,calc((100vh_-_10rem_-_8px)*9/16))] flex-col min-[1080px]:max-w-[min(100%,calc((100vh_-_10rem_-_8px)*16/9))]">
               <div className="min-h-0 flex-1" />
               <div className="shrink-0">
-                <VideoCard />
+                <VideoCard onGoToSite={() => setDismissed(true)} />
               </div>
               <div className="flex min-h-0 flex-1 items-center justify-end py-2">
                 <img

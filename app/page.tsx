@@ -9,7 +9,7 @@ const html = readFileSync(join(process.cwd(), "public", "clone.html"), "utf-8");
 export default function Home() {
   return (
     <>
-      <ClonedSite html={html} title="Lai & Turner Law Firm PLLC" />
+      <ClonedSite html={html} title="Mycroft" />
       <Overlay />
     </>
   );
