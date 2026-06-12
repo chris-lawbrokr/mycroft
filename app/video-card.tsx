@@ -66,8 +66,8 @@ export default function VideoCard({
           className="size-12 shrink-0 rounded-xl"
         />
         <blockquote className="max-w-[200px] text-sm font-normal">
-          Mycroft&apos;s 5-in-1 platform seamlessly consolidated our entire
-          security stack
+          "Mycroft&apos;s 5-in-1 platform seamlessly consolidated our entire
+          security stack."
         </blockquote>
       </figure>
       <CardActions />
