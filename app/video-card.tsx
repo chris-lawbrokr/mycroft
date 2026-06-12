@@ -55,7 +55,7 @@ export default function VideoCard({
       {/* Center search section, moved over from the chat card. */}
       <div className="relative z-10 flex w-full max-w-3xl flex-col items-center gap-6 px-8 text-white">
         <h2
-          className={`text-center text-3xl font-medium leading-tight text-[#9de0b8] min-[1080px]:text-4xl ${rhymesDisplay.className}`}
+          className={`text-center text-3xl font-medium leading-tight text-white min-[1080px]:text-4xl ${rhymesDisplay.className}`}
         >
           Security automated. Compliance solved.
         </h2>
@@ -105,17 +105,25 @@ export default function VideoCard({
         </button>
       </div>
       {/* Desktop-only customer testimonial pinned bottom-left, glass styled. */}
-      <figure className="absolute bottom-8 left-8 hidden h-24 max-w-[440px] items-center gap-4 rounded-3xl border border-white/30 bg-white/10 px-6 text-left text-white shadow-lg shadow-black/10 backdrop-blur-md min-[1080px]:flex">
+      <figure className="absolute bottom-8 left-8 hidden h-24 max-w-[520px] items-center gap-4 rounded-3xl border border-white/30 bg-white/10 px-6 text-left text-white shadow-lg shadow-black/10 backdrop-blur-md min-[1080px]:flex">
         <img
           src="/images/testimonial-icon.png"
           alt=""
           aria-hidden
           className="size-12 shrink-0 rounded-xl"
         />
-        <blockquote className="max-w-[200px] text-sm font-normal">
-          "Mycroft&apos;s 5-in-1 platform seamlessly consolidated our entire
-          security stack."
-        </blockquote>
+        <div className="flex flex-col gap-1">
+          <blockquote className="max-w-[300px] text-sm font-normal">
+            Mycroft&apos;s 5-in-1 platform seamlessly consolidated our entire
+            security stack.
+          </blockquote>
+          <button
+            type="button"
+            className="text-left text-xs font-medium text-white/70 transition-colors hover:text-white"
+          >
+            Read more
+          </button>
+        </div>
       </figure>
       <CardActions />
     </div>
