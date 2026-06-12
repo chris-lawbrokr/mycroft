@@ -1,4 +1,4 @@
-import { ChevronDown, FileLock, Globe, ShieldCheck } from "lucide-react";
+import { ChevronDown, FileLock, Globe, Landmark, ShieldCheck } from "lucide-react";
 import { rhymesDisplay } from "./fonts";
 import CardActions from "./card-actions";
 import CallCtaMenu from "./call-cta-menu";
@@ -82,6 +82,7 @@ export default function VideoCard({
 
         <div className="hidden w-full flex-wrap items-center justify-center gap-3 min-[1150px]:flex">
           {[
+            { icon: Landmark, label: "CMMC" },
             { icon: ShieldCheck, label: "SOC 2" },
             { icon: Globe, label: "GDPR" },
             { icon: FileLock, label: "HIPAA" },
