@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Arial for all body text by default. */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tailwind v4 no longer defaults buttons to a pointer cursor — restore it. */
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
