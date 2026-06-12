@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import VideoCard from "./video-card";
+import Marquee from "./marquee";
 import { IconActions } from "./card-actions";
 
 // Single intro card. Scrolling past it fades the overlay out to reveal the
@@ -126,7 +127,7 @@ export default function Overlay() {
         <div className="relative h-full w-full">
           {/* First card — fades out as the next step fades in. */}
           <div
-            className="absolute inset-0 flex items-center justify-center px-8 py-8 transition-opacity duration-700 ease-in-out min-[1080px]:px-24"
+            className="absolute inset-0 flex items-center justify-center px-8 py-8 transition-opacity duration-700 ease-in-out min-[1150px]:px-24"
             style={{
               opacity: step === 0 ? 1 : 0,
               pointerEvents: step === 0 ? "auto" : "none",
@@ -135,18 +136,15 @@ export default function Overlay() {
             {/* Column matches the card's width so the wordmark can sit against
                 the card's right edge; equal flex spacers keep the card centered
                 and center the wordmark in the white gap below it. */}
-            <div className="flex h-full w-full max-w-[min(100%,calc((100vh_-_10rem_-_8px)*9/16))] flex-col min-[1080px]:max-w-[min(100%,calc((100vh_-_10rem_-_8px)*16/9))]">
+            <div className="flex h-full w-full max-w-[min(100%,calc((100vh_-_10rem_-_8px)*9/16))] flex-col min-[1150px]:max-w-[min(100%,calc((100vh_-_10rem_-_8px)*16/9))]">
               <div className="min-h-0 flex-1" />
               <div className="shrink-0">
                 <VideoCard onGoToSite={() => setDismissed(true)} />
               </div>
-              <div className="flex min-h-0 flex-1 items-center justify-end py-2">
-                <img
-                  src="/images/boxii.svg"
-                  alt="Lai & Turner Law Firm PLLC"
-                  className="w-28 min-[1080px]:w-40"
-                />
+              <div className="shrink-0 pt-8">
+                <Marquee />
               </div>
+              <div className="min-h-0 flex-1" />
             </div>
           </div>
         </div>
@@ -156,11 +154,11 @@ export default function Overlay() {
       {dismissed && (
         <>
           {/* Mobile: full-width centered bar with evenly spread buttons. */}
-          <div className="fixed inset-x-6 bottom-6 z-[10000] flex gap-1 rounded-3xl border border-[#1f2b3b]/50 bg-[#1f2b3b]/55 p-2 shadow-lg shadow-black/20 backdrop-blur-md min-[1080px]:hidden">
+          <div className="fixed inset-x-6 bottom-6 z-[10000] flex gap-1 rounded-3xl border border-[#1f2b3b]/50 bg-[#1f2b3b]/55 p-2 shadow-lg shadow-black/20 backdrop-blur-md min-[1150px]:hidden">
             <IconActions withLabels uniform seamless fluid onAction={reopen} />
           </div>
           {/* Desktop: compact pill pinned bottom-left. */}
-          <div className="fixed bottom-8 left-8 z-[10000] hidden gap-1 rounded-3xl border border-[#1f2b3b]/50 bg-[#1f2b3b]/55 p-2 shadow-lg shadow-black/20 backdrop-blur-md min-[1080px]:flex">
+          <div className="fixed bottom-8 left-8 z-[10000] hidden gap-1 rounded-3xl border border-[#1f2b3b]/50 bg-[#1f2b3b]/55 p-2 shadow-lg shadow-black/20 backdrop-blur-md min-[1150px]:flex">
             <IconActions withLabels uniform seamless onAction={reopen} />
           </div>
         </>
