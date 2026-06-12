@@ -9,7 +9,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { rhymesDisplay } from "./fonts";
 import CardActions from "./card-actions";
 import CallCtaMenu from "./call-cta-menu";
@@ -165,12 +165,44 @@ function SearchGlyph() {
   );
 }
 
+// "Book a demo" CTA used between sections of the chat response.
+function BookDemo() {
+  return (
+    <button
+      type="button"
+      className="mt-1 inline-flex w-fit items-center rounded-full border border-white/40 bg-white/20 px-4 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover:bg-white/30"
+    >
+      Book a demo
+    </button>
+  );
+}
+
 // The grown-up search input: a glass chat dialogue seeded with the chosen
 // compliance topic, with an X to collapse back to the search view.
 function ChatBox({ topic, onClose }: { topic: string; onClose: () => void }) {
   // While closing, play the shrink animation; unmount once it finishes so the
   // fade-out mirrors the fade-in instead of vanishing instantly.
   const [closing, setClosing] = useState(false);
+
+  // The Overlay swallows wheel/touch gestures to drive the intro and dismiss
+  // it. Those native listeners sit on an ancestor, so a React onWheel here
+  // fires too late to stop them. Attach native listeners on the scroll area
+  // that stopPropagation (without preventing default) so the conversation
+  // scrolls on its own while the gesture never reaches the overlay.
+  const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const stop = (e: Event) => e.stopPropagation();
+    el.addEventListener("wheel", stop);
+    el.addEventListener("touchstart", stop);
+    el.addEventListener("touchmove", stop);
+    return () => {
+      el.removeEventListener("wheel", stop);
+      el.removeEventListener("touchstart", stop);
+      el.removeEventListener("touchmove", stop);
+    };
+  }, []);
 
   return (
     <div
@@ -198,16 +230,71 @@ function ChatBox({ topic, onClose }: { topic: string; onClose: () => void }) {
         </button>
       </div>
 
-      {/* Conversation. Seeded with an assistant greeting about the topic. */}
-      <div className="flex-1 overflow-y-auto px-4 py-4">
+      {/* Conversation. Seeded with a fixed CMMC overview response (placeholder
+          content) shown regardless of which compliance chip was clicked. */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
         <div className="flex items-start gap-2.5">
           <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/15">
             <Sparkles className="size-3.5 text-white/80" />
           </span>
-          <p className="max-w-sm rounded-2xl rounded-tl-sm border border-white/20 bg-white/10 px-3.5 py-2.5 text-sm font-normal leading-relaxed text-white/90">
-            Hi — I can help you get {topic} compliant. Ask me about controls,
-            evidence, or where you stand today.
-          </p>
+          <div className="flex max-w-md flex-col gap-4 rounded-2xl rounded-tl-sm border border-white/20 bg-white/10 px-4 py-3.5 text-sm font-normal text-white/90">
+            <div className="flex flex-col gap-2">
+              <span className="text-xs font-semibold uppercase tracking-wide text-white/60">
+                Compliance
+              </span>
+              <h3 className="text-base font-semibold text-white">
+                CMMC compliance, built for defense contractors
+              </h3>
+              <p className="leading-relaxed text-white/80">
+                Mycroft&apos;s Risk Operations Center removes the operational
+                burden, helping you meet all CMMC requirements and secure DoD
+                contracts with confidence.
+              </p>
+              <BookDemo />
+            </div>
+
+            <div className="flex flex-col gap-2 border-t border-white/15 pt-3">
+              <h4 className="font-semibold text-white">
+                Why CMMC matters to you
+              </h4>
+              <p className="leading-relaxed text-white/80">
+                CMMC compliance is required to work with the U.S. Department of
+                Defense and its contractors, ensuring your organization protects
+                controlled unclassified information.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1">
+                <h5 className="font-medium text-white">
+                  Protect contract eligibility
+                </h5>
+                <p className="leading-relaxed text-white/80">
+                  Without CMMC compliance, you cannot bid on or maintain DoD
+                  contracts. Certification at Level 1, 2, or 3 is required
+                  depending on the sensitivity of the work.
+                </p>
+              </div>
+              <div className="flex flex-col gap-1">
+                <h5 className="font-medium text-white">Safeguard sensitive data</h5>
+                <p className="leading-relaxed text-white/80">
+                  CMMC enforces strict controls to protect controlled
+                  unclassified information from breaches and unauthorized access.
+                </p>
+              </div>
+              <div className="flex flex-col gap-1">
+                <h5 className="font-medium text-white">
+                  Strengthen competitive positioning
+                </h5>
+                <p className="leading-relaxed text-white/80">
+                  Organizations that achieve compliance faster gain an advantage
+                  in securing and retaining government contracts.
+                </p>
+              </div>
+            </div>
+
+            <BookDemo />
+          </div>
         </div>
       </div>
 
