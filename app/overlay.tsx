@@ -192,9 +192,9 @@ export default function Overlay() {
               <div className="absolute inset-0 bg-[#1f2b3b]/50 backdrop-blur-2xl" />
               <div className="relative z-10 flex w-full max-w-3xl flex-col items-center gap-6 px-8 text-white">
                 <h2
-                  className={`text-center text-3xl font-medium leading-tight min-[1080px]:text-5xl ${rhymesDisplay.className}`}
+                  className={`text-center text-3xl font-medium leading-tight text-[#9de0b8] min-[1080px]:text-5xl ${rhymesDisplay.className}`}
                 >
-                  Let us know how we can <em>help</em>.
+                  Security automated. Compliance solved.
                 </h2>
                 <div className="flex w-full items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-white shadow-lg shadow-black/10 backdrop-blur-md">
                   <svg

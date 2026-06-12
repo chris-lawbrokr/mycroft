@@ -1,3 +1,4 @@
+import { ChevronDown, FileLock, Globe, ShieldCheck } from "lucide-react";
 import { rhymesDisplay } from "./fonts";
 import CardActions from "./card-actions";
 import CallCtaMenu from "./call-cta-menu";
@@ -51,12 +52,58 @@ export default function VideoCard({
       <div className="absolute right-6 top-6 min-[1080px]:hidden">
         <CallCtaMenu />
       </div>
-      <span
-        className={`relative px-10 text-center text-[clamp(2.25rem,11vw,3.5rem)] leading-[1.1] text-[#e3d9bf] min-[1080px]:px-0 min-[1080px]:text-[clamp(2rem,8vw,6rem)] ${rhymesDisplay.className}`}
-      >
-        The People's
-        <br className="min-[1080px]:hidden" /> Attorney
-      </span>
+      {/* Center search section, moved over from the chat card. */}
+      <div className="relative z-10 flex w-full max-w-3xl flex-col items-center gap-6 px-8 text-white">
+        <h2
+          className={`text-center text-3xl font-medium leading-tight text-[#9de0b8] min-[1080px]:text-4xl ${rhymesDisplay.className}`}
+        >
+          Security automated. Compliance solved.
+        </h2>
+        <div className="flex w-full items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-white shadow-lg shadow-black/10 backdrop-blur-md">
+          <svg
+            className="h-5 w-5 shrink-0 text-white/80"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Ask us about anything..."
+            className="w-full bg-transparent text-base font-normal text-white placeholder:text-white/70 focus:outline-none"
+          />
+        </div>
+
+        <div className="hidden w-full flex-wrap items-center justify-center gap-3 min-[1080px]:flex">
+          {[
+            { icon: ShieldCheck, label: "SOC 2" },
+            { icon: Globe, label: "GDPR" },
+            { icon: FileLock, label: "HIPAA" },
+          ].map(({ icon: Icon, label }) => (
+            <button
+              key={label}
+              type="button"
+              className="flex min-w-32 cursor-pointer items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-2 text-sm font-normal text-white shadow-lg shadow-black/10 backdrop-blur-md transition-colors hover:bg-white/20"
+            >
+              <Icon className="size-4 text-white/80" />
+              {label}
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="flex cursor-pointer flex-col items-center gap-1 text-sm font-normal text-white/70 transition-colors hover:text-white"
+        >
+          I&apos;m looking for something else
+          <ChevronDown className="size-4" />
+        </button>
+      </div>
       {/* Desktop-only customer testimonial pinned bottom-left, glass styled. */}
       <figure className="absolute bottom-8 left-8 hidden h-24 max-w-[440px] items-center gap-4 rounded-3xl border border-white/30 bg-white/10 px-6 text-left text-white shadow-lg shadow-black/10 backdrop-blur-md min-[1080px]:flex">
         <img
