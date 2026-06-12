@@ -168,8 +168,20 @@ function SearchGlyph() {
 // The grown-up search input: a glass chat dialogue seeded with the chosen
 // compliance topic, with an X to collapse back to the search view.
 function ChatBox({ topic, onClose }: { topic: string; onClose: () => void }) {
+  // While closing, play the shrink animation; unmount once it finishes so the
+  // fade-out mirrors the fade-in instead of vanishing instantly.
+  const [closing, setClosing] = useState(false);
+
   return (
-    <div className="animate-chat-grow mx-auto flex h-[clamp(15rem,34vh,20rem)] w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-white/30 bg-white/10 text-left text-white shadow-lg shadow-black/10 backdrop-blur-md">
+    <div
+      onAnimationEnd={(e) => {
+        // Only react to this element's own shrink, not the grow or any child.
+        if (closing && e.target === e.currentTarget) onClose();
+      }}
+      className={`mx-auto flex h-[clamp(15rem,34vh,20rem)] w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-white/30 bg-white/10 text-left text-white shadow-lg shadow-black/10 backdrop-blur-md ${
+        closing ? "animate-chat-shrink" : "animate-chat-grow"
+      }`}
+    >
       {/* Header: topic + close. */}
       <div className="flex items-center justify-between border-b border-white/15 px-4 py-3">
         <div className="flex items-center gap-2 text-sm font-medium text-white/90">
@@ -178,7 +190,7 @@ function ChatBox({ topic, onClose }: { topic: string; onClose: () => void }) {
         </div>
         <button
           type="button"
-          onClick={onClose}
+          onClick={() => setClosing(true)}
           aria-label="Close chat"
           className="flex size-7 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white"
         >
