@@ -1,15 +1,15 @@
 "use client";
 
 export default function ClonedSite({
-  html,
+  src,
   title,
 }: {
-  html: string;
+  src: string;
   title: string;
 }) {
   return (
     <iframe
-      srcDoc={html}
+      src={src}
       title={title}
       sandbox="allow-same-origin allow-popups allow-forms"
       style={{
