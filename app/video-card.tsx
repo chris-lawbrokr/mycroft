@@ -34,6 +34,14 @@ export default function VideoCard({
   // Which compliance chip opened the chat, or null when the intro search view
   // is showing. Setting a topic grows the search input into a chat dialogue.
   const [chatTopic, setChatTopic] = useState<string | null>(null);
+  // Text typed into the intro search input. The first keystroke opens the chat
+  // and the text carries over into the dialogue's composer.
+  const [draft, setDraft] = useState("");
+
+  const closeChat = () => {
+    setChatTopic(null);
+    setDraft("");
+  };
 
   return (
     <div className="relative mx-auto flex aspect-[1080/1920] w-full max-w-[min(100%,calc((100vh_-_10rem_-_8px)*9/16))] items-center justify-center overflow-hidden rounded-4xl text-[clamp(2rem,8vw,6rem)] font-bold text-[#111] min-[1150px]:aspect-[1920/1080] min-[1150px]:max-w-[min(100%,calc((100vh_-_10rem_-_8px)*16/9))]">
@@ -90,6 +98,12 @@ export default function VideoCard({
               <SearchGlyph />
               <input
                 type="text"
+                value={draft}
+                onChange={(e) => {
+                  setDraft(e.target.value);
+                  // Any text opens the chat; default the topic to CMMC.
+                  if (e.target.value && chatTopic === null) setChatTopic("CMMC");
+                }}
                 placeholder="Ask us about anything..."
                 className="w-full bg-transparent text-base font-normal text-white placeholder:text-white/70 focus:outline-none"
               />
@@ -117,7 +131,11 @@ export default function VideoCard({
             </button>
           </>
         ) : (
-          <ChatBox topic={chatTopic} onClose={() => setChatTopic(null)} />
+          <ChatBox
+            topic={chatTopic}
+            initialDraft={draft}
+            onClose={closeChat}
+          />
         )}
       </div>
       {/* Desktop-only customer testimonial pinned bottom-left, glass styled. */}
@@ -179,10 +197,20 @@ function BookDemo() {
 
 // The grown-up search input: a glass chat dialogue seeded with the chosen
 // compliance topic, with an X to collapse back to the search view.
-function ChatBox({ topic, onClose }: { topic: string; onClose: () => void }) {
+function ChatBox({
+  topic,
+  initialDraft,
+  onClose,
+}: {
+  topic: string;
+  initialDraft: string;
+  onClose: () => void;
+}) {
   // While closing, play the shrink animation; unmount once it finishes so the
   // fade-out mirrors the fade-in instead of vanishing instantly.
   const [closing, setClosing] = useState(false);
+  // The composer carries over whatever was typed in the intro search input.
+  const [message, setMessage] = useState(initialDraft);
 
   // The Overlay swallows wheel/touch gestures to drive the intro and dismiss
   // it. Those native listeners sit on an ancestor, so a React onWheel here
@@ -305,6 +333,13 @@ function ChatBox({ topic, onClose }: { topic: string; onClose: () => void }) {
           <input
             type="text"
             autoFocus
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            // Drop the cursor at the end of the carried-over text.
+            onFocus={(e) => {
+              const end = e.target.value.length;
+              e.target.setSelectionRange(end, end);
+            }}
             placeholder={`Ask about ${topic}...`}
             className="w-full bg-transparent text-sm font-normal text-white placeholder:text-white/70 focus:outline-none"
           />
