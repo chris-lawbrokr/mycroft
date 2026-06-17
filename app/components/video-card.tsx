@@ -10,7 +10,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { rhymesDisplay } from "./fonts";
+import { rhymesDisplay } from "../lib/fonts";
 import CardActions from "./card-actions";
 import CallCtaMenu from "./call-cta-menu";
 
