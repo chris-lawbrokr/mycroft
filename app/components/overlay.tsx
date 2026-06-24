@@ -136,13 +136,20 @@ export default function Overlay() {
             {/* Column matches the card's width so the wordmark can sit against
                 the card's right edge; equal flex spacers keep the card centered
                 and center the wordmark in the white gap below it. */}
-            <div className="flex h-full w-full max-w-[min(100%,calc((100vh_-_10rem_-_8px)*9/16))] flex-col min-[1150px]:max-w-[min(100%,calc((100vh_-_10rem_-_8px)*16/9))]">
+            <div className="flex h-full w-full max-w-[min(100%,calc((100vh_-_13rem_-_8px)*9/16))] flex-col min-[1150px]:max-w-[min(100%,calc((100vh_-_13rem_-_8px)*16/9))]">
               <div className="min-h-0 flex-1" />
               <div className="shrink-0">
                 <VideoCard onGoToSite={() => setDismissed(true)} />
               </div>
               <div className="shrink-0 pt-8">
                 <Marquee />
+              </div>
+              <div className="flex shrink-0 justify-end pt-4">
+                <img
+                  src="/images/poweredby.svg"
+                  alt="Powered by"
+                  className="h-[22px] w-auto"
+                />
               </div>
               <div className="min-h-0 flex-1" />
             </div>
