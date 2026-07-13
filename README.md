@@ -1,4 +1,4 @@
-## Mycroft
+# Mycroft
 
 ```bash
 npm install
